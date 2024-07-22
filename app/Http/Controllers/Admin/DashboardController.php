@@ -10,6 +10,6 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        echo Auth::id();
+        return view('admin.dashboard');
     }
 }
