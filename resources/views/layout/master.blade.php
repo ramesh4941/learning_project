@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>YNEX - App Name - @yield('title')</title>
-    <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
+    <!-- Start::app-header -->
+    @yield('header')
+    <!-- End::app-header -->
     <meta name="Author" content="Spruko Technologies Private Limited">
 
     <!-- Favicon -->
@@ -23,6 +24,8 @@
     <link rel="stylesheet" href="{{ asset('assets/libs/%40simonwep/pickr/themes/nano.min.css')}}"> <!-- Choices Css -->
     <link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css')}}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    @yield('custom-css')
 </head>
 
 <body>

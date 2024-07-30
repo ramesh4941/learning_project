@@ -1,5 +1,8 @@
 @extends('admin.layout.main')
 
+@section('title','Dashoard')
+@section('meta-description','Admin Description')
+
 @section('content')
 <style>
     .attandance-radio{

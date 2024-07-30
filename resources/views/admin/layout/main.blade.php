@@ -1,5 +1,14 @@
 @extends('layout.master')
 
+@section('header')
+    <title>Name - @yield('title')</title>
+    <meta name="Description" content="@yield('meta-description')">
+@endsection
+
+@section('custom-css')
+    <link href="{{ asset('assets/custom/admin/css/custom.css')}}" rel="stylesheet">
+@endsection
+
 @section('layouts')
 <div class="page"> 
     <!-- Start::app-header -->
@@ -77,5 +86,9 @@
     @include('admin.layout.footer')
     <!-- Footer End -->
 
+    <!-- JS Start -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    @yield('js')
+    <!-- JS Start -->
 </div>
 @endsection
