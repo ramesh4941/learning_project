@@ -10,4 +10,19 @@ $( document ).ready(function() {
             $('#single-parent').hide();
         }
     });
+
+    $('#single_parent_relation').on('change', function() {
+        const ParentType = $(this).val();
+        const parentName = $('#name');
+        const parentOccupation = $('#occupation');
+        if (ParentType) {
+            parentName.attr('placeholder', `Enter ${ParentType} Name`);
+            parentOccupation.attr('placeholder', `Enter ${ParentType} Occupation`);
+
+            $('.singleParentLabel').html(ParentType + " ");
+        } else {
+            parentName.attr('placeholder', 'Enter Name');
+            parentOccupation.attr('placeholder', 'Enter Occupation');
+        }
+    });
 });

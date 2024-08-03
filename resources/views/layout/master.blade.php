@@ -11,8 +11,9 @@
     <meta name="Author" content="Spruko Technologies Private Limited">
 
     <!-- Favicon -->
-    <link rel="icon" href="https://spruko.com/demo/ynex/dist/assets/images/brand-logos/favicon.ico" type="image/x-icon">
-    <!-- Choices JS -->
+    <link rel="icon" href="add_image_fevicon" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="{{ asset('assets/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script> <!-- Main Theme Js -->
     <script src="{{ asset('assets/js/main.js')}}"></script> <!-- Bootstrap Css -->
     <link id="style" href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet"> <!-- Style Css -->

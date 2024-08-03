@@ -1,3 +1,45 @@
 #single-parent{
     display: none;
 }
+
+
+/* Teacher style */
+  .teacherBankDetails {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    table-layout: fixed;
+  }
+
+  .teacherBankDetails td {
+    padding: 10px;
+  }
+
+  .teacherBankDetails td:first-child {
+    width: 200px;
+    white-space: nowrap;
+  }
+
+  .teacherBankDetails td:last-child {
+    width: 100%;
+  }
+
+  .ifsc-section-alignment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .fetch-teacher-ifsc {
+    background-color: #e9e8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .fetching-ifsc{
+    font-size: 15px;
+  }
+/* Teacher style end */  
