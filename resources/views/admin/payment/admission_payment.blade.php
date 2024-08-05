@@ -250,8 +250,8 @@
                 "description": "Razorpay payment",
                 // "image": "/images/logo-icon.png",
                 "prefill": {
-                    "name": "ABC",
-                    "email": "abc@gmail.com"
+                    "name": "TEST",
+                    "email": "test@gmail.com"
                 },
                 "theme": {
                     "color": "#ff7529"
