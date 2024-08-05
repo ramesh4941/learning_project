@@ -17,37 +17,37 @@ class PaymentController extends Controller
         return view('admin.payment.admission_payment',compact('admission'));
     }
 
-    public function generate_payment_link()
+    public function generate_payment_link(Request $request)
     {
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
         $response = $api->paymentLink->create(array(
-            'amount'=>500,
-            'currency'=>'INR',
-            'accept_partial'=>false,
-            'expire_by'=>1722892188,
-            'reference_id'=> '123456789990',
-            'description' => 'For XYZ purpose',
-            'customer' => array(
-                'name'=>'Gaurav Kumar',
-                'email' => 'gaurav.kumar@example.com',
-                'contact'=>'+919000090000'
+            'amount' => $request->amount*100,
+            'currency' => 'INR',
+            'accept_partial' => false,
+            'expire_by' => 1722892188,
+            'reference_id' => (string)rand(111111, 999999),
+            'description'  =>  $request->description,
+            'customer'  =>  array(
+                'name' => $request->name,
+                'email'  =>  $request->email,
+                'contact' => '+91'.$request->phone,
             ), 
-            'notify'=>array(
-                'sms'=>true,
-                'email'=>true
+            'notify' => array(
+                'sms' => true,
+                'email' => true
             ) ,
-            'reminder_enable'=>true,
-            'notes'=>array(
-                'policy_name'=> 'Jeevan Bima'
+            'reminder_enable' => true,
+            'notes' => array(
+                'admission_id' =>  $request->admission_id,
             ),
-            'callback_url' => 'https://example-callback-url.com/',
-            'callback_method'=>'get'
+            'callback_url'  =>  'https://example-callback-url.com/',
+            'callback_method' => 'get'
         ));
 
         if (isset($response['short_url'])) {
-            echo 'Payment Link: ' . $response['short_url'];
+            return $response['short_url'];
         } else {
-            echo 'Payment link not generated.';
+            return 'Payment link not generated.';
         }
     }
 }

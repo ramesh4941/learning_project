@@ -203,7 +203,7 @@
                                         </button>
                                     </div>
                                     <div class="admission-razorpay-link">
-                                        <button type="button" class="btn btn-primary-light">
+                                        <button type="button" class="btn btn-primary-light" id="sendPaymentLink">
                                             Pay Now<i class="ri-user-3-line ms-2 align-middle d-inline-block"></i>
                                         </button>
                                     </div>                                   
@@ -212,9 +212,58 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
         </div><!--End::row-1 -->
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Launch demo modal </button>
+    
+    <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel1">
+                        Payment Link
+                    </h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-2">
+                                <label class="text-muted mb-1">Send / Receive</label>
+                                <div class="input-group">
+                                    <input type="text" id="razorpayPaymetLink" aria-label="First name" class="form-control" readonly>
+                                    <button class="btn btn-light" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Copy" style="color: #636363">
+                                        <i class="fa fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="text-muted mb-1">Send / Receive</label>
+                            <div class="d-sm-flex align-items-center justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input form-checked-success" type="checkbox" value="" id="checkebox-sm" checked="">
+                                    <label class="form-check-label" for="checkebox-sm"> WhatsApp </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input form-checked-success" type="checkbox" value="" id="checkebox-sm" checked="">
+                                    <label class="form-check-label" for="checkebox-sm"> WhatsApp </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input form-checked-success" type="checkbox" value="" id="checkebox-sm" checked="">
+                                    <label class="form-check-label" for="checkebox-sm"> WhatsApp </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -238,7 +287,6 @@
     $(document).ready(function(){
         var totalAmount = $('.total-Amount').text();
         $('.pay-amount').text(totalAmount);
-
 
         document.getElementById('personal-details-trigger').onclick = function(e) {
             e.preventDefault();
@@ -265,6 +313,30 @@
             var rzp = new Razorpay(options);
             rzp.open();
         };
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        $( "#sendPaymentLink" ).on( "click", function() {
+            var url = "{{route('admin.payment.generate_payment_link')}}";
+            var amount = '{{$totalAmount}}';
+            var name = "{{ $admission->get_parents->single_parent ? (($admission->get_parents->single_parent_relation == 'Father') ? $admission->get_parents->father_name : $admission->get_parents->mother_name ) : $admission->get_parents->father_name }}";
+            var phone = "{{$admission->get_parents->phone}}";
+            var email = "{{$admission->get_parents->email_address}}";
+            var studentAdmissionId = "{{$admission->id}}";
+            var description = "{{$admission->first_name}} Admission";
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {'_token': csrfToken, 'amount': amount, 'name': name, 'phone': phone, 'email': email, 'admission_id': studentAdmissionId, 'description': description},
+                success: function(response){
+                    $('#razorpayPaymetLink').val(response);
+                    $('#exampleModal').show();
+                }
+            });
+        });
     });
 </script>
 @endsection

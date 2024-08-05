@@ -90,7 +90,7 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         
         Route::prefix('payment/')->name('payment.')->group(function () {
             Route::get('admission/{id}',[PaymentController::class,'admission_payment'])->name('admission');
-            Route::get('link',[PaymentController::class,'generate_payment_link'])->name('generate_link');
+            Route::post('generate-payment-link',[PaymentController::class,'generate_payment_link'])->name('generate_payment_link');
         });
     });
 });

@@ -42,6 +42,12 @@
     ];
     const nanoButtons = [];
     let nanoPickr = null;
+
+    if (!pickrContainerPrimary || !themeContainerPrimary) {
+        // console.error('Containers not found');//theme changer
+        return;
+    }
+
     for (const [theme, config] of nanoThemes) {
         const button = document.createElement('button');
         button.innerHTML = theme;
