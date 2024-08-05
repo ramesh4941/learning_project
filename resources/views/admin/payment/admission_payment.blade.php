@@ -19,7 +19,7 @@
         <!-- Page Header Close -->
         <!-- Start::row -->
         <div class="row">
-            <div class="col-xl-5">
+            <div class="col-xl-4">
                 <div class="card custom-card">
                     <div class="card-body p-0">
                         <div class="text-center mb-4 mt-4">
@@ -82,68 +82,189 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-7">
-                <div class="card custom-card">
-                    <div class="card-header justify-content-between">
-                        <div class="card-title"> Manage Class </div>
+            <div class="col-xl-8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title"> Manage Class </div>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fw-semibold d-flex align-items-center">Admission Form Charge</div>
+                                            <div>₹{{number_format($admission->fee_details->admission_form, 2, '.', ',')}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fw-semibold d-flex align-items-center">Registration Fee </div>
+                                            <div>₹{{number_format($admission->fee_details->registration_fee, 2, '.', ',')}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fw-semibold d-flex align-items-center">Admission Fee </div>
+                                            <div>₹{{number_format($admission->fee_details->admission_fee, 2, '.', ',')}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fw-semibold d-flex align-items-center">Annual Fee </div>
+                                            <div>₹{{number_format($admission->fee_details->annual_charge, 2, '.', ',')}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fw-semibold d-flex align-items-center">Examination Fee </div>
+                                            <div>₹{{number_format($admission->fee_details->examination_fee, 2, '.', ',')}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="fw-semibold d-flex align-items-center">Monthly Fee ({{\Carbon\Carbon::now()->format('F')}})</div>
+                                            <div>₹{{number_format($admission->fee_details->monthly_fee, 2, '.', ',')}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-center justify-content-between admission-total-amount">
+                                            <div class="fw-semibold d-flex align-items-center">
+                                                Total
+                                            </div>
+                                            <div>
+                                                <?php
+                                                    $amountAry = array($admission->fee_details->admission_form,$admission->fee_details->registration_fee,$admission->fee_details->admission_fee,$admission->fee_details->annual_charge,$admission->fee_details->examination_fee,$admission->fee_details->monthly_fee);
+                                                    $totalAmount = array_sum($amountAry);
+                                                ?>
+        
+                                                ₹<span class="total-Amount">{{number_format($totalAmount, 2, '.', ',')}}</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="fw-semibold d-flex align-items-center">Admission Form </div>
-                                    <div>₹{{number_format($admission->fee_details->admission_form, 2, '.', ',')}}</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="fw-semibold d-flex align-items-center">Admission Form </div>
-                                    <div> {{$admission->fee_details->registration_fee}}</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="fw-semibold d-flex align-items-center">Admission Form </div>
-                                    <div> {{$admission->fee_details->admission_fee}}</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="fw-semibold d-flex align-items-center">Admission Form </div>
-                                    <div> {{$admission->fee_details->annual_charge}}</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="fw-semibold d-flex align-items-center">Admission Form </div>
-                                    <div> {{$admission->fee_details->examination_fee}}</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="fw-semibold d-flex align-items-center">Admission Form </div>
-                                    <div> {{$admission->fee_details->monthly_fee}}</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="fw-semibold d-flex align-items-center">Admission Form </div>
-                                    <div> {{$admission->fee_details->admission_form}}</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="fw-semibold d-flex align-items-center"> <span class="avatar avatar-xs me-2">
-                                            <img src="../assets/images/faces/4.jpg" alt=""> </span>Samantha Sams
+                    <div class="col-md-12">
+                        <div class="card custom-card">
+                            <div class="card-header justify-content-between">
+                                <div class="card-title"> Payment Methords: </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row gy-3">
+                                    <div class="col-xl-6">
+                                        <div class="form-check form-check-lg payment-method-container mb-0" onclick="handlePaymentMethodClick('razorpayGateway')">
+                                            <input id="razorpayGateway" name="payment-methods" value="razorpayGateway" type="radio" class="form-check-input">
+                                            <div class="form-check-label">
+                                                <div class="d-sm-flex align-items-center justify-content-between">
+                                                    <div class="me-2">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="{{asset('assets/images/payment-icon/razorpay.png')}}" alt="">
+                                                        </span>
+                                                    </div>
+                                                    <div class="shipping-partner-details me-sm-5 me-0">
+                                                        <p class="mb-0 fw-semibold">RazorPay Gateway</p>
+                                                        <p class="text-muted fs-11 mb-0">UPI, QR, Wallet, Credit/Debit Card</p>
+                                                    </div>
+                                                    <div class="fw-semibold me-sm-5 me-0"> ₹<span class="pay-amount">0</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div> <button class="btn btn-sm btn-icon btn-primary-light"> <i class="ri-add-line"></i>
-                                        </button> </div>
+                                    <div class="col-xl-6">
+                                        <div class="form-check payment-method-container mb-0" onclick="handlePaymentMethodClick('razorpayLink')">
+                                            <input id="razorpayLink" name="payment-methods" value="razorpayLink" type="radio" class="form-check-input">
+                                            <div class="form-check-label">
+                                                <div class="d-sm-flex align-items-center justify-content-between">
+                                                    <div class="me-2">
+                                                        <span class="avatar avatar-md">
+                                                            <img src="{{asset('assets/images/payment-icon/link.png')}}" alt="">
+                                                        </span>
+                                                    </div>
+                                                    <div class="shipping-partner-details me-sm-5 me-0">
+                                                        <p class="mb-0 fw-semibold">RazorPay Link</p>
+                                                        <p class="text-muted fs-11 mb-0">Send Link on Parent Phone</p>
+                                                    </div>
+                                                    <div class="fw-semibold me-sm-5 me-0"> ₹<span class="pay-amount">0</span> </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </li>
-                        </ul>
+                                <div class="px-4 pt-3 mt-3 border-top border-block-start-dashed d-sm-flex justify-content-center">
+                                    <div class="admission-razorpay-gateway">
+                                        <form action="{{ route('razorpay.payment.store') }}" method="POST" id="paymentForm">
+                                            @csrf
+                                            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                                        </form>
+                                        <button type="button" class="btn btn-success-light" id="personal-details-trigger">
+                                            Pay Now<i class="ri-user-3-line ms-2 align-middle d-inline-block"></i>
+                                        </button>
+                                    </div>
+                                    <div class="admission-razorpay-link">
+                                        <button type="button" class="btn btn-primary-light">
+                                            Pay Now<i class="ri-user-3-line ms-2 align-middle d-inline-block"></i>
+                                        </button>
+                                    </div>                                   
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
             </div>
         </div><!--End::row-1 -->
     </div>
+@endsection
+
+@section('js')
+<script>
+    function handlePaymentMethodClick(id) {
+        document.getElementById(id).checked = true;
+
+        if (id === 'razorpayGateway') {
+            $('.admission-razorpay-gateway').show();
+            $('.admission-razorpay-link').hide();
+        } else if (id === 'razorpayLink') {
+            $('.admission-razorpay-link').show();
+            $('.admission-razorpay-gateway').hide();
+        }else{
+            $('.admission-razorpay-link').hide();
+            $('.admission-razorpay-gateway').hide();
+        }
+    }
+
+    $(document).ready(function(){
+        var totalAmount = $('.total-Amount').text();
+        $('.pay-amount').text(totalAmount);
+
+
+        document.getElementById('personal-details-trigger').onclick = function(e) {
+            e.preventDefault();
+
+            var options = {
+                "key": "{{ env('RAZORPAY_KEY') }}",
+                "amount": "{{$totalAmount * 100}}",
+                "currency": "INR",
+                "description": "Razorpay payment",
+                // "image": "/images/logo-icon.png",
+                "prefill": {
+                    "name": "ABC",
+                    "email": "abc@gmail.com"
+                },
+                "theme": {
+                    "color": "#ff7529"
+                },
+                "handler": function (response){
+                    // After the payment is completed, submit the form with payment details
+                    document.getElementById('paymentForm').submit();
+                }
+            };
+
+            var rzp = new Razorpay(options);
+            rzp.open();
+        };
+    });
+</script>
 @endsection

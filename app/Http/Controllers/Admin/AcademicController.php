@@ -15,6 +15,8 @@ class AcademicController extends Controller
     public function class_setup()
     {
         $classes = Classes::select('id','class_roman','class_english')->where('status',0)->get();
+        $sections = Section::select('id','section')->where('status',0)->get();
+        $teachers = Teacher::select('id','first_name','last_name')->where('status',0)->get();
         $classSetups = ClassSetup::where('status',0)->get();
         return view('admin.academic.class_setup',compact('classes','sections','teachers','classSetups'));
     }

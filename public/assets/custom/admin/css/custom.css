@@ -43,3 +43,24 @@
     font-size: 15px;
   }
 /* Teacher style end */  
+
+.admission-total-amount{
+  font-size: 20px;
+}
+
+.payment-method-container{
+  position: relative;
+  padding: 0.625rem;
+  border: 1px solid var(--input-border);
+  border-radius: .5rem;
+  .form-check-input {
+    position: absolute;
+    inset-inline-end: 0.75rem;
+    inset-block-start: 1.2rem;
+  }
+}
+
+.admission-razorpay-gateway,
+.admission-razorpay-link{
+  display: none;
+}
