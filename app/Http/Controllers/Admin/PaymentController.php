@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\Admission;
 use Razorpay\Api\Api;
+// use Illuminate\Support\Carbon;
 
 class PaymentController extends Controller
 {
@@ -24,7 +25,7 @@ class PaymentController extends Controller
             'amount' => $request->amount*100,
             'currency' => 'INR',
             'accept_partial' => false,
-            'expire_by' => 1722892188,
+            'expire_by' => strtotime("+ 20 minutes"),
             'reference_id' => (string)rand(111111, 999999),
             'description'  =>  $request->description,
             'customer'  =>  array(

@@ -215,9 +215,9 @@
             </div>
         </div><!--End::row-1 -->
     </div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"> Launch demo modal </button>
+    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#paymentLinkPopup"> Launch demo modal </button> --}}
     
-    <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-modal="true" role="dialog">
+    <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="paymentLinkPopup" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-modal="true" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -233,7 +233,7 @@
                                 <label class="text-muted mb-1">Send / Receive</label>
                                 <div class="input-group">
                                     <input type="text" id="razorpayPaymetLink" aria-label="First name" class="form-control" readonly>
-                                    <button class="btn btn-light" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Copy" style="color: #636363">
+                                    <button id="copyPaymentLinkBtn" class="btn btn-light" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Copy" style="color: #636363">
                                         <i class="fa fa-copy"></i>
                                     </button>
                                 </div>
@@ -248,11 +248,11 @@
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input form-checked-success" type="checkbox" value="" id="checkebox-sm" checked="">
-                                    <label class="form-check-label" for="checkebox-sm"> WhatsApp </label>
+                                    <label class="form-check-label" for="checkebox-sm"> SMS </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input form-checked-success" type="checkbox" value="" id="checkebox-sm" checked="">
-                                    <label class="form-check-label" for="checkebox-sm"> WhatsApp </label>
+                                    <label class="form-check-label" for="checkebox-sm"> Email </label>
                                 </div>
                             </div>
                         </div>
@@ -330,13 +330,40 @@
             $.ajax({
                 type: "POST",
                 url: url,
-                data: {'_token': csrfToken, 'amount': amount, 'name': name, 'phone': phone, 'email': email, 'admission_id': studentAdmissionId, 'description': description},
+                data: {
+                    '_token': csrfToken,
+                    'amount': amount, 
+                    'name': name, 
+                    'phone': phone, 
+                    'email': email, 
+                    'admission_id': studentAdmissionId, 
+                    'description': description
+                },
+                beforeSend: function() {
+                    $('#sendPaymentLink').html(`<i class="fa fa-spin fa-spinner"></i> Generating link...`).attr('disabled', true);
+                },
                 success: function(response){
                     $('#razorpayPaymetLink').val(response);
-                    $('#exampleModal').show();
+                    $('#paymentLinkPopup').modal('show');
+                },
+                complete: function() {
+                    $('#sendPaymentLink').html(`Pay Now <i class="ri-user-3-line ms-2 align-middle d-inline-block"></i>`).attr('disabled', false);
                 }
             });
         });
+    });
+</script>
+
+<script>
+    $( "#copyPaymentLinkBtn" ).on( "click", function() {
+      var copyPaymentLink = document.getElementById("razorpayPaymetLink");
+    
+      // Select the text field
+      copyPaymentLink.select();
+      copyPaymentLink.setSelectionRange(0, 99999); // For mobile devices
+    
+      // Copy the text inside the text field
+      navigator.clipboard.writeText(copyPaymentLink.value);
     });
 </script>
 @endsection

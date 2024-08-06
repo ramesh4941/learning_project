@@ -12,5 +12,13 @@ use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
-    
+    public function add()
+    {
+
+    }
+
+    public function check_roll_number()
+    {
+        
+    }
 }
