@@ -88,10 +88,10 @@
             </div>
         </div>
         <div class="col-xl-3">
+            <div class="position-fixed">
             <div class="card custom-card">
                 <div class="card-body p-0">
                     
-            <div class="position-fixed">
                     @php
                         use Carbon\Carbon;
                         $date = Carbon::now();
