@@ -173,7 +173,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
-                                        <div class="form-check payment-method-container mb-0" onclick="handlePaymentMethodClick('razorpayLink')">
+                                        <div class="form-check form-check-lg payment-method-container mb-0" onclick="handlePaymentMethodClick('razorpayLink')">
                                             <input id="razorpayLink" name="payment-methods" value="razorpayLink" type="radio" class="form-check-input">
                                             <div class="form-check-label">
                                                 <div class="d-sm-flex align-items-center justify-content-between">
@@ -194,13 +194,30 @@
                                 </div>
                                 <div class="px-4 pt-3 mt-3 border-top border-block-start-dashed d-sm-flex justify-content-center">
                                     <div class="admission-razorpay-gateway">
-                                        <form action="{{ route('razorpay.payment.store') }}" method="POST" id="paymentForm">
+                                        {{-- <form action="{{ route('admin.payment.razorpay_callback') }}" method="POST" id="paymentForm">
                                             @csrf
                                             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                                         </form>
                                         <button type="button" class="btn btn-success-light" id="personal-details-trigger">
                                             Pay Now<i class="ri-user-3-line ms-2 align-middle d-inline-block"></i>
-                                        </button>
+                                        </button> --}}
+                                        <form action="{{ route('admin.payment.razorpay_callback') }}" method="POST" >
+                                            @csrf
+                                            <input type="hidden" name="admission_id" value="{{$admission->id}}">
+                                            <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                                data-key="{{ env('RAZORPAY_KEY') }}"
+                                                {{-- data-amount="{{$totalAmount*100}}" --}}
+                                                data-amount="10000"
+                                                data-name="Ramesh Learning"
+                                                data-description="{{$admission->first_name}} Admission"
+                                                data-image="https://cdn-lightspeed.teamwork.com/tw-icon/tw-icon-192x192.png"
+                                                data-prefill.name="{{ $admission->get_parents->single_parent ? (($admission->get_parents->single_parent_relation == 'Father') ? $admission->get_parents->father_name : $admission->get_parents->mother_name ) : $admission->get_parents->father_name }}"
+                                                data-prefill.email="{{$admission->get_parents->email_address}}"
+                                                data-prefill.contact="{{$admission->get_parents->phone}}"
+                                                data-notes.admission_id="{{$admission->id}}"
+                                                data-theme.color="#ff7529">
+                                            </script>
+                                        </form>
                                     </div>
                                     <div class="admission-razorpay-link">
                                         <button type="button" class="btn btn-primary-light" id="sendPaymentLink">
@@ -293,19 +310,21 @@
 
             var options = {
                 "key": "{{ env('RAZORPAY_KEY') }}",
-                "amount": "{{$totalAmount * 100}}",
+                "amount": 1000,//"{{$totalAmount * 100}}",
                 "currency": "INR",
                 "description": "Razorpay payment",
                 // "image": "/images/logo-icon.png",
                 "prefill": {
                     "name": "TEST11",
-                    "email": "test@gmail.com"
+                    "email": "test@gmail.com",
+                    "contact": "+919661442809"
                 },
                 "theme": {
                     "color": "#ff7529"
                 },
                 "handler": function (response){
                     // After the payment is completed, submit the form with payment details
+                    console.log(response);
                     document.getElementById('paymentForm').submit();
                 }
             };
@@ -358,11 +377,9 @@
     $( "#copyPaymentLinkBtn" ).on( "click", function() {
       var copyPaymentLink = document.getElementById("razorpayPaymetLink");
     
-      // Select the text field
       copyPaymentLink.select();
       copyPaymentLink.setSelectionRange(0, 99999); // For mobile devices
-    
-      // Copy the text inside the text field
+
       navigator.clipboard.writeText(copyPaymentLink.value);
     });
 </script>

@@ -30,12 +30,12 @@
                 </div> --}}
                 <div class="card custom-card">
                     <div class="card-header justify-content-between"> 
-                        <div class="card-title"> Adminstration Sign In </div>
+                        <div class="card-title"> Teacher Sign In </div>
                     </div>
                     <div class="card-body p-4">
                         {{-- <p class="h5 fw-semibold mb-2 text-center">Adminstration Sign In</p> --}}
                         <div class="row gy-3">
-                            <form method="POST" action="{{ route('login') }}">
+                            <form method="POST" action="{{ route('teacher.auth') }}">
                             @csrf
                                 <div class="col-xl-12 mb-3">
                                     <label for="email" class="form-label text-default">Email Address</label>

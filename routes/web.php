@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ClassesController;
 use App\Http\Controllers\Admin\AdmissionController;
-use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ParentsController;
 use App\Http\Controllers\Admin\EntranceController;
 use App\Http\Controllers\Admin\SectionController;
@@ -13,6 +12,10 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\AcademicController;
 use App\Http\Controllers\Admin\PaymentController;
+
+use App\Http\Controllers\Teacher\Auth\LoginController as TeacherLogin;
+use App\Http\Controllers\Teacher\DashboardController as TeacherDashboard;
+use App\Http\Controllers\Teacher\AttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +27,6 @@ use App\Http\Controllers\Admin\PaymentController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('product',[PaymentController::class,'index']);
-Route::post('razorpay-payment',[PaymentController::class,'store'])->name('razorpay.payment.store');
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -90,7 +89,23 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         
         Route::prefix('payment/')->name('payment.')->group(function () {
             Route::get('admission/{id}',[PaymentController::class,'admission_payment'])->name('admission');
+            Route::post('status',[PaymentController::class,'razorpay_callback'])->name('razorpay_callback');
             Route::post('generate-payment-link',[PaymentController::class,'generate_payment_link'])->name('generate_payment_link');
+        });
+    });
+});
+
+Route::prefix('teacher/')->name('teacher.')->group(function () {
+    Route::get('login',[TeacherLogin::class,'login'])->name('login');
+    Route::post('auth',[TeacherLogin::class,'login_auth'])->name('auth');
+
+    Route::middleware('auth:teacher')->group( function () {
+        Route::get('dashboard',[TeacherDashboard::class,'dashboard'])->name('dashboard');
+        Route::get('logout',[TeacherLogin::class,'logout'])->name('logout');
+
+        Route::prefix('attendance/')->name('attendance.')->group(function () {
+            Route::get('student/daily',[AttendanceController::class,'index'])->name('student.daily');
+            Route::post('/submit', [AttendanceController::class, 'submitAttendance'])->name('submit');
         });
     });
 });

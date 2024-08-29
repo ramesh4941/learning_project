@@ -16,4 +16,15 @@ class ClassSetup extends Model
         'class_strength',
         'status',
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'class_id', 'class_id')
+                    ->where('section_id', $this->section_id);
+    }
 }

@@ -13,4 +13,9 @@ class Section extends Model
         'section',
         'status',
     ];
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'section_id');
+    }
 }

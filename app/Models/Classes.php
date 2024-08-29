@@ -14,4 +14,9 @@ class Classes extends Model
         'class_english',
         'status',
     ];
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'class_id');
+    }
 }
