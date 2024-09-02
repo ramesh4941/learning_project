@@ -6,12 +6,12 @@
 @section('content')
     <div class="container-fluid"> <!-- Page Header -->
         <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
-            <h1 class="page-title fw-semibold fs-18 mb-0">Classes</h1>
+            <h1 class="page-title fw-semibold fs-18 mb-0">Admission Payment</h1>
             <div class="ms-md-1 ms-0">
                 <nav>
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Class</li>
+                        <li class="breadcrumb-item active" aria-current="page">Admission Payment</li>
                     </ol>
                 </nav>
             </div>
@@ -42,31 +42,27 @@
                                     </tr>
                                     <tr>
                                         <td class="w-50"> <span class="fw-semibold">Email</span> </td>
-                                        <td>: {{$admission->first_name}}</td>
+                                        <td>: {{$admission->email_address}}</td>
                                     </tr>
                                     <tr>
                                         <td class="w-50"> <span class="fw-semibold">D.O.B</span> </td>
-                                        <td>: {{$admission->first_name}}</td>
+                                        <td>: {{$admission->dob}}</td>
                                     </tr>
                                     <tr>
                                         <td class="w-50"> <span class="fw-semibold">Gender</span> </td>
-                                        <td>: {{$admission->first_name}}</td>
+                                        <td>: {{$admission->gender}}</td>
                                     </tr>
                                     <tr>
                                         <td class="w-50"> <span class="fw-semibold">Age</span> </td>
-                                        <td>: 35</td>
+                                        <td>: 22</td>
                                     </tr>
                                     <tr>
                                         <td class="w-50"> <span class="fw-semibold">Mobile </span> </td>
-                                        <td>: +91 {{$admission->first_name}}</td>
+                                        <td>: +91 9876543223</td>
                                     </tr>
                                     <tr>
                                         <td class="w-50"> <span class="fw-semibold">Mother Tongue </span> </td>
-                                        <td>: Telugu</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="w-50"> <span class="fw-semibold">Marital Status </span> </td>
-                                        <td>: Unmarried</td>
+                                        <td>: Hindi</td>
                                     </tr>
                                     <tr>
                                         <td class="w-50"> <span class="fw-semibold">Blood Group </span> </td>
@@ -74,7 +70,7 @@
                                     </tr>
                                     <tr>
                                         <td class="w-50"> <span class="fw-semibold">Address </span> </td>
-                                        <td> {{$admission->first_name}}</td>
+                                        <td> {{$admission->address}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -208,7 +204,7 @@
                                                 data-key="{{ env('RAZORPAY_KEY') }}"
                                                 {{-- data-amount="{{$totalAmount*100}}" --}}
                                                 data-amount="10000"
-                                                data-name="Ramesh Learning"
+                                                data-name="Edulites"
                                                 data-description="{{$admission->first_name}} Admission"
                                                 data-image="https://cdn-lightspeed.teamwork.com/tw-icon/tw-icon-192x192.png"
                                                 data-prefill.name="{{ $admission->get_parents->single_parent ? (($admission->get_parents->single_parent_relation == 'Father') ? $admission->get_parents->father_name : $admission->get_parents->mother_name ) : $admission->get_parents->father_name }}"

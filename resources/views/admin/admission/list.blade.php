@@ -20,16 +20,16 @@
         <div class="col-xl-12">
             <div class="card custom-card">
                 <div class="card-header justify-content-between">
-                    <div class="card-title"> Manage Invoices </div>
+                    <div class="card-title"> Manage Admission </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table text-nowrap table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Product Manager</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Team</th>
+                                    <th scope="col">Student</th>
+                                    <th scope="col">Phone & Email</th>
+                                    <th scope="col">Class & section</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>

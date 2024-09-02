@@ -25,7 +25,7 @@
         <div class="col-xl-9">
             <div class="card custom-card">
                 <div class="card-header justify-content-between">
-                    <div class="card-title"> Manage Invoices </div>
+                    <div class="card-title"> Attendance </div>
                     <div>
                         <small id="attendanceSubmit" class="text-primary"></small>
                     </div>
@@ -91,7 +91,6 @@
             <div class="position-fixed">
             <div class="card custom-card">
                 <div class="card-body p-0">
-                    
                     @php
                         use Carbon\Carbon;
                         $date = Carbon::now();

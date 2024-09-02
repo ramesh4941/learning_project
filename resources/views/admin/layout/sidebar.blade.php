@@ -50,8 +50,50 @@
                 <!-- Start::slide -->
                 <li class="slide"> 
                     <a href="widgets.html" class="side-menu__item">
-                        <i class="bx bx-gift side-menu__icon"></i> 
-                        <span class="side-menu__label">Widgets<span lass="badge bg-danger-transparent ms-2">Hot</span></span> 
+                        {{-- <i class="bx bx-gift side-menu__icon"></i>  --}}
+                        <span class="side-menu__label">Class</span> 
+                    </a> 
+                </li>
+                <li class="slide"> 
+                    <a href="widgets.html" class="side-menu__item">
+                        {{-- <i class="bx bx-gift side-menu__icon"></i>  --}}
+                        <span class="side-menu__label">Section</span> 
+                    </a> 
+                </li>
+                <li class="slide"> 
+                    <a href="widgets.html" class="side-menu__item">
+                        {{-- <i class="bx bx-gift side-menu__icon"></i>  --}}
+                        <span class="side-menu__label">Teacher</span> 
+                    </a> 
+                </li>
+                <li class="slide"> 
+                    <a href="widgets.html" class="side-menu__item">
+                        {{-- <i class="bx bx-gift side-menu__icon"></i>  --}}
+                        <span class="side-menu__label">Subject</span> 
+                    </a> 
+                </li>
+                <li class="slide"> 
+                    <a href="widgets.html" class="side-menu__item">
+                        {{-- <i class="bx bx-gift side-menu__icon"></i>  --}}
+                        <span class="side-menu__label">Class Setup</span> 
+                    </a> 
+                </li>
+                <li class="slide"> 
+                    <a href="widgets.html" class="side-menu__item">
+                        {{-- <i class="bx bx-gift side-menu__icon"></i>  --}}
+                        <span class="side-menu__label">Fee Setup</span> 
+                    </a> 
+                </li>
+                <li class="slide"> 
+                    <a href="widgets.html" class="side-menu__item">
+                        {{-- <i class="bx bx-gift side-menu__icon"></i>  --}}
+                        <span class="side-menu__label">Students</span> 
+                    </a> 
+                </li>
+                <li class="slide"> 
+                    <a href="widgets.html" class="side-menu__item">
+                        {{-- <i class="bx bx-gift side-menu__icon"></i>  --}}
+                        <span class="side-menu__label">Admition Pending</span> 
                     </a> 
                 </li>
                 <!-- End::slide --> 

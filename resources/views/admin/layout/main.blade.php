@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('header')
-    <title>Name - @yield('title')</title>
+    <title>{{env('APP_NAME')}} - @yield('title')</title>
     <meta name="Description" content="@yield('meta-description')">
 @endsection
 

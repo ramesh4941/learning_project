@@ -22,7 +22,7 @@
             @csrf
                 <div class="card custom-card">
                     <div class="card-header justify-content-between">
-                        <div class="card-title"> Manage Invoices </div>
+                        <div class="card-title"> Manage Parents </div>
                         <div>
                             <div class="form-check form-check-md d-flex align-items-center"> 
                                 <input class="form-check-input" value="1" type="checkbox" name="single_parent" id="single-parent-checkbox"> 
@@ -164,7 +164,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xl-12 mt-2">
-                                <button type="submit" class="btn btn-lg btn-primary">Sign In</button> 
+                                <button type="submit" class="btn btn-lg btn-primary">Save</button> 
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
         <div class="col-xl-12">
             <div class="card custom-card">
                 <div class="card-header justify-content-between">
-                    <div class="card-title"> Manage Invoices </div>
+                    <div class="card-title"> Manage Parents </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
