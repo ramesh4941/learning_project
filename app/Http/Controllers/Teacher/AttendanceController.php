@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\Attendance;
+use App\Models\Holiday;
 use Illuminate\Support\Carbon;
 
 class AttendanceController extends Controller
@@ -68,4 +69,72 @@ class AttendanceController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function viewAttendance()
+    {
+        // Get the current year and month
+        $year = now()->year;
+        $month = now()->month;
+
+        // Get the number of days in the current month
+        $daysInMonth = Carbon::create($year, $month)->daysInMonth;
+
+        // Calculate which days are Sundays in the month
+        $sundays = [];
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+            $date = Carbon::create($year, $month, $day);
+            if ($date->isSunday()) {
+                $sundays[] = $day;
+            }
+        }
+
+        // Get the currently authenticated teacher
+        $teacher = Auth::user();
+
+        // Retrieve class setup details for the teacher
+        $classSetup = $teacher->classSetup;
+        $classId = $classSetup->class_id;
+        $sectionId = $classSetup->section_id;
+
+        // Retrieve students based on the class_id and section_id
+        $students = Student::where('class_id', $classId)
+            ->where('section_id', $sectionId)
+            ->with(['attendances' => function($query) use ($year, $month) {
+                $query->whereYear('date', $year)
+                      ->whereMonth('date', $month);
+            }])
+            ->get();
+
+        // Retrieve holidays that intersect with the current month
+        $holidays = Holiday::whereYear('start_date', '<=', $year)
+            ->whereYear('end_date', '>=', $year)
+            ->whereMonth('start_date', '<=', $month)
+            ->whereMonth('end_date', '>=', $month)
+            ->get();
+
+        // Pass data to the view
+        return view('teacher.attendance.list', compact('students', 'daysInMonth', 'sundays', 'holidays'));
+    }
+
+    public function viewAttendanceByStudent($studentId)
+    {
+        $student = Student::with(['attendances' => function($query) {
+            $query->orderBy('date', 'asc'); // Order attendance records by date
+        }, 'attendances.teacher'])->findOrFail($studentId);
+
+        // Get the current date
+        $today = Carbon::now();
+        // Get the number of days in the current month
+        $daysInMonth = $today->daysInMonth;
+
+        // Fetch holidays for the current month
+        $holidays = Holiday::whereMonth('start_date', $today->month)
+                            ->whereYear('start_date', $today->year)
+                            ->orWhere(function ($query) use ($today) {
+                                $query->whereMonth('end_date', $today->month)
+                                      ->whereYear('end_date', $today->year);
+                            })
+                            ->get();
+
+        return view('teacher.attendance.details', compact('student', 'holidays', 'today', 'daysInMonth'));
+    }
 }

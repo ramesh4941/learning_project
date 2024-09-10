@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\AcademicController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\HolidayController;
 
 use App\Http\Controllers\Teacher\Auth\LoginController as TeacherLogin;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboard;
@@ -86,6 +87,11 @@ Route::prefix('admin/')->name('admin.')->group(function () {
         Route::prefix('entrance/')->name('entrance.')->group(function () {
             Route::get('question-create',[EntranceController::class,'question_create'])->name('question.create');
         });
+
+        Route::prefix('holiday/')->name('holiday.')->group(function () {
+            Route::get('create',[HolidayController::class,'create'])->name('create');
+            Route::post('store',[HolidayController::class,'store'])->name('store');
+        });
         
         Route::prefix('payment/')->name('payment.')->group(function () {
             Route::get('admission/{id}',[PaymentController::class,'admission_payment'])->name('admission');
@@ -106,6 +112,8 @@ Route::prefix('teacher/')->name('teacher.')->group(function () {
         Route::prefix('attendance/')->name('attendance.')->group(function () {
             Route::get('student/daily',[AttendanceController::class,'index'])->name('student.daily');
             Route::post('/submit', [AttendanceController::class, 'submitAttendance'])->name('submit');
+            Route::get('/list', [AttendanceController::class, 'viewAttendance'])->name('list');
+            Route::get('student/{id}',[AttendanceController::class,'viewAttendanceByStudent'])->name('student.view');
         });
     });
 });
